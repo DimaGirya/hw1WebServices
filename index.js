@@ -5,8 +5,8 @@ var gradesJson = require('./grades.json');
 
 
 app.get('/',function(req,res){
-	 // res.sendfile('./Api.html');
-	  res.sendFile('./Api.html' , { root : __dirname});
+	  res.sendfile('./Api.html');
+	  //res.sendFile('./Api.html' , { root : __dirname});
 });
 
 app.get('/getAllStudent',function(req,res){
