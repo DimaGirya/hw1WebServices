@@ -6,17 +6,14 @@ var gradesJson = require('./grades.json');
 
 app.get('/',function(req,res){
 	  res.sendfile('./API.html');
-	  //res.sendFile('./Api.html' , { root : __dirname});
 });
 
 app.get('/getAllStudent',function(req,res){
-	res.json(gradesJson);
+	res.status(200).json(gradesJson);
 });
 
 app.get('/getStudendGrade/:studentId',function(req,res){
 	var studentId = parseInt(req.params.studentId,10);
-	console.log(typeof studentId);
-	console.log("studentId:"+studentId);
 	var status = 200;
 	var message;
 	if(studentId < 0 || Number.isNaN(studentId)){
@@ -33,8 +30,8 @@ app.get('/getStudendGrade/:studentId',function(req,res){
 		}
 	}
 }
-	res.status(status);
-	res.send(message);
+	res.status(status).send(message);
+
 });
 
 app.get('/getAllStudentsAverageBiggerThan/:grade',function(req,res){
@@ -53,7 +50,6 @@ app.get('/getAllStudentsAverageBiggerThan/:grade',function(req,res){
 		student = gradesJson.students[i];
 		if(calculateAverage(student) > gradeInput){
 			flag = true;
-			console.log(student);
 			message.push(student);
 		 }
 		}
@@ -61,8 +57,12 @@ app.get('/getAllStudentsAverageBiggerThan/:grade',function(req,res){
 	if(flag == false){
 		message =  {"message":"no such student found"};
 	}
-	res.status(status);
-	res.send(message);
+		res.status(status).send(message);
+});
+
+app.get('*', function(req, res){
+	var message =  {"message":"Bad Request, no such function"};
+  res.send(message, 400);
 });
 
 app.listen(process.env.PORT || 3000, function(){
@@ -76,6 +76,5 @@ function calculateAverage(student){
 		for(var i = 0;i < coursesArraySize;i++ ){
 				gradeSum+= coursesArray[i].grade;
 		}
-		console.log(gradeSum/coursesArraySize);
 		return gradeSum/coursesArraySize;
 }
