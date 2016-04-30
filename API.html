@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Students info service</title>
+
+    <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+ <h1>Welcome to students info service</h1>
+
+<h3>All parrams must by in get method</h3>
+
+<h2>http://localhost:3000</h2>
+<h4>Welocme page + API</h4>
+
+<h2>http://localhost:3000/getAllStudent</h2>
+<h4>Get all student from data base.</h4>
+
+
+
+<h2>http://localhost:3000/getStudendGrade/:studentId</h2>
+<h4>Where :studentId an ID student number (For example 1).<h4>
+<h4>return json object of student or json  {"message":"student not fount"} if no such student.
+Argument studentId must by a possitive number.</h4>
+
+
+<h2>http://localhost:3000/getAllStudentsAverageBiggerThan/:grade</h2>
+<h4>Where :grade an argument number (Arguments must by number in range between 0 to 100)<h4>
+<h4>return json of students which have average bigger than argument.
+If no such student return json  {"message":"no such student found"}.</h4>
+
+<h2>Debugging:</h2> 
+<h3>If you put ilegall input ypu get a status 400 and json:{"message":"illegal input"}.</h3>
+
+<h2>Json format example:</h2>
+"students": [{<br>
+		"firstName": "FirstName",<br>
+		"lastName": "LastName",<br>
+		"studenId":1,<br>
+		"courses": [{<br>
+			"courseName": "C++",<br>
+			"year": 2015,<br>
+			"grade": 85<br>
+		}, {<br>
+			"courseName": "Java",<br>
+			"year": 2015,<br>
+			"grade": 95<br>
+		}, {<br>
+			"courseName": "Web Service",<br>
+			"year": 2015,<br>
+			"grade": 90<br>
+		}]<br>
+
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
+
+

@@ -1,0 +1,73 @@
+{
+	"students": [{
+		"firstName": "Dima",
+		"lastName": "Girya",
+		"studenId":1,
+		"courses": [{
+			"courseName": "C++",
+			"year": 2015,
+			"grade": 85
+		}, {
+			"courseName": "Java",
+			"year": 2015,
+			"grade": 95
+		}, {
+			"courseName": "Web Service",
+			"year": 2015,
+			"grade": 90
+		}]
+
+	}, {
+		"firstName": "Amir",
+		"lastName": "Or",
+		"studenId":2,
+		"courses": [{
+			"courseName": "C++",
+			"year": 2015,
+			"grade": 80
+		}, {
+			"courseName": "Java",
+			"year": 2015,
+			"grade": 89
+		}, {
+			"courseName": "Web Service",
+			"year": 2015,
+			"grade": 93
+		}]
+	}, {
+		"firstName": "Liza",
+		"lastName": "Gilman",
+		"studenId":3,
+		"courses": [{
+			"courseName": "C++",
+			"year": 2015,
+			"grade": 75
+		}, {
+			"courseName": "Java",
+			"year": 2015,
+			"grade": 90
+		}, {
+			"courseName": "Web Service",
+			"year": 2015,
+			"grade": 98
+		}]
+	},
+	{
+		"firstName": "Bad",
+		"lastName": "Student",
+		"studenId":4,
+		"courses": [{
+			"courseName": "C++",
+			"year": 2015,
+			"grade": 30
+		}, {
+			"courseName": "Java",
+			"year": 2015,
+			"grade": 40
+		}, {
+			"courseName": "Web Service",
+			"year": 2015,
+			"grade": 50
+		}]
+	}]
+}
