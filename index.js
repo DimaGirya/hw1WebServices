@@ -3,15 +3,13 @@ var express = require('express');
 var app = express();
 var gradesJson = require('./grades.json');
 var port = process.env.PORT || 3000;
-//var apiPage = require('./Api.html');
 app.get('/',function(req,res){
-	  res.sendfile('./Api.html');
-//	res.send(apiPage);// send all API'
+	 // res.sendfile('./Api.html');
+	  res.sendFile('./Api.html' , { root : __dirname});
 });
 
 app.get('/getAllStudent',function(req,res){
 	res.json(gradesJson);
-	
 });
 
 app.get('/getStudendGrade/:studentId',function(req,res){
