@@ -1,15 +1,24 @@
 var http = require('http');
 var express = require('express');
 var app = express();
-var gradesJson = require('./grades.json');
+//var gradesJson = require('./grades.json');
+var mongoose = require('mongoose');
+var db = mongoose.connect('mongodb://DimaGirya:90742@ds049925.mlab.com:49925/grades');
 
+var gradesSchema = require('./schemaGrades');
+
+var Studnets  = mongoose.model('Studnets',gradesSchema);
+
+var studentArray;
+//console.log("debaging:");
+//console.log(Studnets);
 
 app.get('/',function(req,res){
 	  res.sendfile('./API.html');
 });
 
 app.get('/getAllStudent',function(req,res){
-	res.status(200).json(gradesJson);
+	res.status(200).json(studentArray);
 });
 
 app.get('/getStudendGrade/:studentId',function(req,res){
@@ -22,10 +31,14 @@ app.get('/getStudendGrade/:studentId',function(req,res){
 	}
 	else{
 	message = {"message":"student not fount"};
-	var sizeArray = gradesJson.students.length;
+	var sizeArray = studentArray.length;
+			console.log("sizeArray:"+sizeArray);
 	for(var i = 0 ; i < sizeArray;i++){
-		if(gradesJson.students[i].studenId == studentId){
-			 message = gradesJson.students[i];
+				console.log("studenId:"+studentId);
+			console.log("student array i:"+studentArray[i]);
+		if(studentArray[i].studentId == studentId){
+	
+			 message = studentArray[i];
 			 break;
 		}
 	}
@@ -44,10 +57,10 @@ app.get('/getAllStudentsAverageBiggerThan/:grade',function(req,res){
 	else{
 	var flag = false;
 	message = [];
-	var sizeArray = gradesJson.students.length;
+	var sizeArray = studentArray.length;
 	var student;
 	for(var i = 0 ; i < sizeArray;i++){
-		student = gradesJson.students[i];
+		student = studentArray[i];
 		if(calculateAverage(student) > gradeInput){
 			flag = true;
 			message.push(student);
@@ -65,9 +78,7 @@ app.get('*', function(req, res){
   res.send(message, 400);
 });
 
-app.listen(process.env.PORT || 3000, function(){
-  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
-});
+
 
 function calculateAverage(student){
 		var coursesArray = student.courses;
@@ -78,3 +89,16 @@ function calculateAverage(student){
 		}
 		return gradeSum/coursesArraySize;
 }
+mongoose.connection.once('open',function(){
+	//console.log(Studnets);
+	Studnets.find({},function(err,data){
+		if(err) throw err;
+		console.log(data);
+		studentArray  = data;
+			mongoose.disconnect();
+			app.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+});
+	});
+
+});
