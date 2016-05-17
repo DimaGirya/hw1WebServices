@@ -1,7 +1,7 @@
 var http = require('http');
 var express = require('express');
 var app = express();
-//var gradesJson = require('./grades.json');
+
 var mongoose = require('mongoose');
 var db = mongoose.connect('mongodb://DimaGirya:90742@ds049925.mlab.com:49925/grades');
 
@@ -10,8 +10,6 @@ var gradesSchema = require('./schemaGrades');
 var Studnets  = mongoose.model('Studnets',gradesSchema);
 
 var studentArray;
-//console.log("debaging:");
-//console.log(Studnets);
 
 app.get('/',function(req,res){
 	  res.sendfile('./API.html');
@@ -90,10 +88,8 @@ function calculateAverage(student){
 		return gradeSum/coursesArraySize;
 }
 mongoose.connection.once('open',function(){
-	//console.log(Studnets);
 	Studnets.find({},function(err,data){
 		if(err) throw err;
-		console.log(data);
 		studentArray  = data;
 			mongoose.disconnect();
 			app.listen(process.env.PORT || 3000, function(){
